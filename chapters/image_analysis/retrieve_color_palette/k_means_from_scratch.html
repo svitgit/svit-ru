@@ -360,6 +360,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Небольшое отступление</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка окружения</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Генерация данных</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Реализация функционала</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Финал</a></li>
 </ul>
             </nav>
         </div>
@@ -469,7 +471,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" src="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8780625962612)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8787211096668)&gt;
 </pre></div>
 </div>
 </div>
@@ -499,6 +501,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="id4">
+<h2>Реализация функционала<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <p>Нам остается только воплатить в жизнь ту визуализацию, что мы видели вначале.
 Итак, нам нужно выбрать три случайные точки среди всех.
 Заведем функцию, которая возвращает три случайных индекса.
@@ -542,7 +547,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" src="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8780625670952)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8787210822548)&gt;
 </pre></div>
 </div>
 </div>
@@ -609,7 +614,7 @@ dtype: float64
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" src="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8780625716612)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8787210807077)&gt;
 </pre></div>
 </div>
 </div>
@@ -647,11 +652,14 @@ dtype: float64
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" src="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8780625716531)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8787202377386)&gt;
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="id5">
+<h2>Финал<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>Нам осталось лишь повторять вышеприведенные шаги до тех пор, пока лейблы кластеров не совпадут для двух последовательных итераций.
 Оформим это в виде цикла <code class="docutils literal notranslate"><span class="pre">while</span></code>:</p>
 <div class="cell docutils container">
@@ -685,7 +693,7 @@ dtype: float64
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" src="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8780617169596)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8787202302421)&gt;
 </pre></div>
 </div>
 </div>
@@ -754,6 +762,8 @@ dtype: float64
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Небольшое отступление</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка окружения</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Генерация данных</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Реализация функционала</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Финал</a></li>
 </ul>
   </nav></div>
 
