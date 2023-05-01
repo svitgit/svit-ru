@@ -1,0 +1,22 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: chapters/intro
+parts:
+    - caption: Stable Diffusion
+      chapters:
+      - file: chapters/stable-diffusion
+      - file: chapters/stable-diffusion-install-windows
+    - caption: Анализ изображений
+      chapters:
+      - file: chapters/image_analysis/retrieve_color_palette/k_means_from_scratch.ipynb
+      # - file: chapters/image_analysis/retrieve_color_palette/frame_color_palette
+    # - caption: "Смартфон для программирования: как использовать его на полную"
+    #   chapters:
+    #   - file: chapters/programming_on_phone/test.md
+    #   - file: chapters/programming_on_phone/termux_setup.ipynb
+    # - caption: Матричные разложения
+    #   chapters:
+    #   - file: chapters/matrix_decompositions/intro
+
