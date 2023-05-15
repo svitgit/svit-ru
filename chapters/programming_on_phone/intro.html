@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Введение &#8212; SVIT-Book</title>
+    <title>Jupyter-notebook на android устройстве &#8212; SVIT-Book</title>
   
   
   
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/svit_logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="K-means" href="../image_analysis/retrieve_color_palette/k_means_from_scratch.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -163,6 +164,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Анализ изображений</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../image_analysis/retrieve_color_palette/k_means_from_scratch.html">K-means</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Оффтопик</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Jupyter-notebook на android устройстве</a></li>
 </ul>
 
     </div>
@@ -264,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/chapters/programming_on_phone/intro.ipynb" target="_blank"
+      <li><a href="../../_sources/chapters/programming_on_phone/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -274,7 +279,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -333,7 +338,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -344,11 +351,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Введение</h1>
+    <h1>Jupyter-notebook на android устройстве</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termux">termux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка среды</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook">Запуск <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -358,35 +376,72 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Введение<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>Однажды я наткнулся на видеоролик в котором док Эммет Браун и Марти Макфлай оказываются в 2015 году.
-Вот, собственно и сам ролик:</p>
-<div class="cell tag_hide-input tag_align-middle docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
-<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;L2xvITU7gdI&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">480</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">89</span><span class="p">)</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="jupyter-notebook-android">
+<h1>Jupyter-notebook на android устройстве<a class="headerlink" href="#jupyter-notebook-android" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>Введение<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>Привет всем. В сегодняшнем ролике попытаюсь ответить на следующий вопрос: Можно ли начать изучать программирование без наличия компьютера, имея под рукой лишь андроид устройства.
+Это может быть смартфон или же планшет.
+В действительности, для начала своего пути телефона или планшета вполне достаточно.
+Однако, я должен сразу предупредить, что данный путь не является оптимальным и комфортным.
+Особенно это касается попытки программирования на телефоне, так как изначально эти устройства заточены под другие задачи.
+Вдобавок, если ты захочешь установить какие-то конкретные пакеты для языка Python, то это может вызвать определенные затруднения.
+Отмечу, что наличие беспроводной клавиатуры, крайне желательно.
+Это чрезвычайно упростит задачи.</p>
+<p>Итак, преступим.
+Сегодня мы попробуем установить <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code> на твой смартфон или планшет.
+Я успешно протестировал этот способ на трех различных устройствах.
+Однако, это всё же не даёт 100% гарантии, что способ подойдет всем.</p>
+</section>
+<section id="termux">
+<h2>termux<a class="headerlink" href="#termux" title="Permalink to this headline">#</a></h2>
+<p>Начнем с установки <a class="reference external" href="https://termux.dev/en/">termux</a>.
+<em>termux</em> - это эмулятор терминала и с его помощью мы установим python и все необходимые пакеты.
+Установить <em>termux</em> можно с google play store.
+Однако, я не рекомендую этого делать, так как там лежит довольно устаревшая версия <em>termux</em> и сами разработчики предупреждают об этом.
+Поэтому для установки нам потребуется <code class="docutils literal notranslate"><span class="pre">.apk</span></code> файл с официального репозитория <em>termux</em> на <a class="reference external" href="https://github.com/termux/termux-app#github">гитахабе</a>.</p>
+<p>Переходим в раздел <a class="reference external" href="https://github.com/termux/termux-app/releases">Releases</a>.
+Я буду использовать универсальную версию <code class="docutils literal notranslate"><span class="pre">.apk</span></code>-файла: <code class="docutils literal notranslate"><span class="pre">termux-app_v0.118.0+github-debug_universal.apk</span></code>.
+Скачиваем файл на телефон и устанавливаем.</p>
+</section>
+<section id="id2">
+<h2>Настройка среды<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>Вначале нам потребуется обновить все дефолтные пакеты и программы.
+Для этого выполним следующую команду:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pkg<span class="w"> </span>upgrade
 </pre></div>
 </div>
+<p>В процессе установки, я соглашаюсь с обновлением всех программ, передавая в качестве ответа символ <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>Теперь установим <code class="docutils literal notranslate"><span class="pre">python</span></code> и необходимые зависимости.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pkg<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>libzmq
+pkg<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python
+</pre></div>
 </div>
-</details>
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="640"
-            height="480"
-            src="https://www.youtube.com/embed/L2xvITU7gdI?start=89"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<p>Теперь, непосредственно, установим <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>jupyter
+</pre></div>
 </div>
+<p>В принципе вот и всё.
+Довольно просто, неправда ли?</p>
+</section>
+<section id="jupyter-notebook">
+<h2>Запуск <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code><a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">#</a></h2>
+<p>Теперь давай запустим <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code> и убедимся в его работаспособности.
+Для этого выполним следующую команду:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-notebook
+</pre></div>
+</div>
+<p>Нам необходимо скопировать адрес, который отображен в termux, в моём случае это:</p>
+<p>и открыть его в браузере.</p>
+<!-- Однажды я наткнулся на видеоролик в котором док Эммет Браун и Марти Макфлай оказываются в 2015 году.
+Вот, собственно и сам ролик:
+
+```{code-cell} ipython3
+:tags: [hide-input, align-middle]
+
+from IPython.display import YouTubeVideo
+YouTubeVideo("L2xvITU7gdI", width=640, height=480, start=89)
+``` --></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -417,12 +472,38 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../image_analysis/retrieve_color_palette/k_means_from_scratch.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">K-means</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termux">termux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка среды</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook">Запуск <code class="docutils literal notranslate"><span class="pre">jupyter-notebook</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
