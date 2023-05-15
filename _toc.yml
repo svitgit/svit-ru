@@ -11,6 +11,10 @@ parts:
     - caption: Анализ изображений
       chapters:
       - file: chapters/image_analysis/retrieve_color_palette/k_means_from_scratch.ipynb
+      
+    - caption: Оффтопик
+      chapters:
+      - file: chapters/programming_on_phone/jupyter_installation_in_termux.md
       # - file: chapters/image_analysis/retrieve_color_palette/frame_color_palette
     # - caption: "Смартфон для программирования: как использовать его на полную"
     #   chapters:
