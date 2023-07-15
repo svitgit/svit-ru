@@ -61,7 +61,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/image_analysis/retrieve_color_palette/k_means_from_scratch';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/data_analysis/retrieve_color_palette/k_means_from_scratch';</script>
     <link rel="shortcut icon" href="../../../_static/svit_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -162,7 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../stable-diffusion.html">Что такое stable-diffusion?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stable-diffusion-install-windows.html">Установка на Windows</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Анализ изображений</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Анализ данных</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">K-means</a></li>
 </ul>
@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/svitgit/svit-book-ru/issues/new?title=Issue%20on%20page%20%2Fchapters/image_analysis/retrieve_color_palette/k_means_from_scratch.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/svitgit/svit-book-ru/issues/new?title=Issue%20on%20page%20%2Fchapters/data_analysis/retrieve_color_palette/k_means_from_scratch.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -270,7 +270,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/chapters/image_analysis/retrieve_color_palette/k_means_from_scratch.md" target="_blank"
+      <li><a href="../../../_sources/chapters/data_analysis/retrieve_color_palette/k_means_from_scratch.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -362,7 +362,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Пример k-means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Визуализация k-means</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка окружения</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Генерация данных</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Реализация функционала</a></li>
@@ -381,44 +381,53 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="k-means">
 <h1>K-means<a class="headerlink" href="#k-means" title="Permalink to this headline">#</a></h1>
 <section id="id1">
-<h2>Пример k-means<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h2>Визуализация k-means<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <p>Всем привет!
 Сегодня рассмотрим решение задачи кластеризации на примере использования метода k-means (он же метод k-средних).
 Пусть у нас имееются некоторые точки на плоскости.
 Знаю, знаю какие-то случайные точки - это довольно скучно.
-Но я всё же хочу начать с этого унылого примера, а в следующем эпизоде показать применение метода для реальной задачи.
-Когда ты смотришь на эти точки, что происходит в твоей голове?
+Но я всё же хочу начать с этого унылого примера, а в следующем эпизоде показать применение метода для реальной задачи.</p>
+<a class="reference internal image-reference" href="../../../_images/just_points.png"><img alt="../../../_images/just_points.png" class="align-center" src="../../../_images/just_points.png" style="width: 720px;" /></a>
+<p>Когда ты смотришь на эти точки, что происходит в твоей голове?
 Лично мой мозг пытается найти какую-то структуру в этих данных.
-Выглядит она как-то так.
-То есть наш мозш пытается каким-то образом упорядочить и выделить что-то общее среди объектов, которые он видит.
+Выглядит она как-то так.</p>
+<a class="reference internal image-reference" href="../../../_images/points_with_outline.png"><img alt="../../../_images/points_with_outline.png" class="align-center" src="../../../_images/points_with_outline.png" style="width: 720px;" /></a>
+<p>То есть наш мозг пытается каким-то образом упорядочить и выделить что-то общее среди объектов, которые он видит.
 При этом всё происходит автоматически без прикладывания существенных усилий.
 Я буду понимать под кластером группу объектов, которая объединена какими-то общими свойствами.
 В данном случае, свойством является то, что часть точек имеет некоторое сгущение и находится вдали от других групп точек.
-В принципе, это и есть возможное решение задачи кластеризации.</p>
+В принципе, это и есть возможное решение задачи кластеризации, которое за бесплатно получено работой мозга.
+Однако, это не всегда так работает. В случае, если данных много и при этом они имеют сложную структуру так быстро найти среди них какие-то общие характеристики просто посмотрев на них, увы не выйдет.
+Поэтому попробуем найти решение этой задачи за счёт использования программирования.</p>
 <p>Теперь давай попробуем воплотить решение в виде программы, которая определит кластеры, которым соответствуют точки.
-Предлагаю поступить следующим образом: давай выберем три случайные точки среди заданных и будем считать, что они соответствуют трем различным кластерам.
-Я буду отображать принадлежность точки определенному кластеру при помощи различных цветов.
+Предлагаю поступить следующим образом: давай выберем три случайные точки среди заданных и будем считать, что они соответствуют трем различным кластерам.</p>
+<a class="reference internal image-reference" href="../../../_images/random_points.png"><img alt="../../../_images/random_points.png" class="align-center" src="../../../_images/random_points.png" style="width: 720px;" /></a>
+<p>Я буду отображать принадлежность точки определенному кластеру при помощи различных цветов.
 Получается, что в таком случае мы определили принадлежность трех точек различным кластерам.
 Осталось разобраться со всеми оставшимися точками, которые в данный момент времени не соотнесены какому-либо кластеру.
 Для того, чтобы определиться с ними поступим следующим образом.
-Будем брать поочередно каждую точку, которая не имеет лейба (то есть не соответствует какому-либо кластеру) и будем считать расстояния до трех точек, которые мы выбрали случайным образом вначале.
+Будем брать поочередно каждую точку, которая не имеет лейба (то есть не соответствует какому-либо кластеру) и определим ближайшую точку из трех зафиксированных в начале.
 После этого в качестве лейбла выберем тот, который соответствует ближайшей точке из трех выбранных.
-В данном случае, точка соответствует синему кластеру.
-Будем повторять этот процесс для всех точек.
+Например, в данном случае, точка соответствует синему кластеру.</p>
+<a class="reference internal image-reference" href="../../../_images/blue_cluster.png"><img alt="../../../_images/blue_cluster.png" class="align-center" src="../../../_images/blue_cluster.png" style="width: 720px;" /></a>
+<p>Далее будем повторять этот процесс для всех точек.
 В результате мы получим такой вид кластеризации для наших данных.</p>
+<a class="reference internal image-reference" href="../../../_images/1st_result.png"><img alt="../../../_images/1st_result.png" class="align-center" src="../../../_images/1st_result.png" style="width: 720px;" /></a>
 <p>На самом деле мы можем улучшить наше решение.
 Для этого поочередно рассмотрим точки каждого кластера и посчитаем для них новый центр.
-Теперь вместо трех случайных точек, которые мы выбрали на первом шаге, будем рассматривать, полученные центры.
+Теперь вместо трех случайных точек, которые мы выбрали на первом шаге, будем рассматривать, полученные центры в процессе усреденения координат различных кластеров.
+Собственно, поэтому метод и называется <code class="docutils literal notranslate"><span class="pre">k-means</span></code>, так как в определенный момент времени рассматривается усреднение по текущему кластеру, для получения нового центра.
 Затем, нам необходимо повторить те же шаги, что мы проделали до этого.
 Т.е. задать лейбл каждой точке в зависимости от того, какой центр находится ближе всего к ней.
-Как ты можешь видеть, уже на второй итерации мы получаем искомое решение.
-Это и есть описание возможной реализации метода <code class="docutils literal notranslate"><span class="pre">k-means</span></code>.</p>
+Как ты можешь видеть, уже на второй итерации мы получаем неплохое решение исходной задачи.</p>
+<a class="reference internal image-reference" href="../../../_images/2nd_result.png"><img alt="../../../_images/2nd_result.png" class="align-center" src="../../../_images/2nd_result.png" style="width: 720px;" /></a>
+<p>Это и есть описание возможной реализации метода <code class="docutils literal notranslate"><span class="pre">k-means</span></code>.
+Теперь перейдем к непосредственному написанию программы.</p>
 </section>
 <section id="id2">
 <h2>Настройка окружения<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>В данном эпизоде мы с нуля рассмотрим процесс написания простенькой реализации метода кластеризации k-средних (он же k-means).
-Я буду предполагать, что тебе известно про пакеты в языке Python, а также известно про виртуальные окружения.
-Давай создадим отдельную папку для нашего сегодняшнего ролика.
+<p>Сегодня я поступлю не совсем честно с тобой и буду предполагать, что тебе известно про пакеты в языке Python, а также известно про виртуальные окружения.
+Давай создадим отдельную папку для нашего сегодняшнего эпизода.
 Я назову её <code class="docutils literal notranslate"><span class="pre">naive_kmeans</span></code>.
 Теперь я создам виртуальное окружение внутри этой папки, следующим образом:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>./venv_utils
@@ -428,12 +437,13 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv_utils/bin/activate
 </pre></div>
 </div>
-<p>В случае windows необходимо выполнить следующуй команду:</p>
+<p>В случае сисетмы windows необходимо выполнить следующую команду:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">venv_utils</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span><span class="p">.</span><span class="n">bat</span>
 </pre></div>
 </div>
 <p>Отлично.
-Виртуальное окружение активировано и мы можем перейти к процессу установки необходимых библиотек.</p>
+Виртуальное окружение активировано и мы можем перейти к процессу установки необходимых библиотек.
+Для этого выполним следующую команду:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pandas<span class="w"> </span>plotnine<span class="w"> </span>scikit-learn
 </pre></div>
 </div>
@@ -442,6 +452,9 @@ document.write(`
 <section id="id3">
 <h2>Генерация данных<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>Теперь непосредственно перейдем к нашей задаче.
+Сегодня я буду без погружения в детали демонстрировать код, который я использовал для решения задачи.
+Рекомендую тебе проследовать по ссылке в описании к этому ролику и повторить со мной все шаги, которые приведены в текстовой версии данного эпизода.
+В случае, если у тебя возникнут какие-либо затруднения я всегда готов ответить на возникшие вопросы в комментариях к этому эпизоду.
 Я создам файл с названием <code class="docutils literal notranslate"><span class="pre">k_means.py</span></code>.
 Для начала подключим все необходимые нам библиотеки.</p>
 <div class="cell docutils container">
@@ -484,7 +497,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Теперь давай просто нарисуем то, как выглядят наши исходные данные:</p>
+<p>Теперь давай просто нарисуем то, как выглядят наши исходные данные.
+Для отрисовки данных я буду использовать пакет <a class="reference external" href="https://plotnine.readthedocs.io/en/stable/index.html">plotnine</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ggplt</span> <span class="o">=</span> <span class="p">(</span>
@@ -502,7 +516,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" src="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8776988714657)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726386973291)&gt;
 </pre></div>
 </div>
 </div>
@@ -512,8 +526,8 @@ document.write(`
 </pre></div>
 </div>
 <p>Давай заведем новый столбец в нашей таблице, в котором мы будем хранить лейбл кластера, которому принадлежит точка.
-Для начала просто присвоим всем точкам кластер нуля.
-Далее мы будем пересчитывать лейбл кластера для каждой точки.</p>
+Для начала просто присвоим всем точкам нулевой кластер.
+Далее мы будем переопределять лейбл кластера для каждой точки, как мы видели в начале ролика.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;cluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
@@ -535,9 +549,9 @@ document.write(`
 </section>
 <section id="id4">
 <h2>Реализация функционала<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>Нам остается только воплатить в жизнь ту визуализацию, что мы видели вначале.
+<p>Нам остается только воплатить в жизнь ту визуализацию, что мы видели в начале.
 Итак, нам нужно выбрать три случайные точки среди всех.
-Заведем функцию, которая возвращает три случайных индекса.
+Заведем функцию, которая возвращает k-случайных индексов, где k - число кластеров.
 В качестве аргументов, пусть она принимает число точек и число кластеров:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -553,8 +567,15 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># Зафиксируем генератор случайных чисел, для воспроизводимости результатов</span>
 <span class="n">rindxs</span> <span class="o">=</span> <span class="n">get_rand_indxs</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">centers</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rindxs</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
-
-<span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rindxs</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Теперь воспользуемся этими индексами и присвоим трем точкам из наших данных лейблы кластеров.
+Я буду использовать строки <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;,</span> <span class="pre">&quot;2&quot;,</span> <span class="pre">&quot;3&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rindxs</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -578,26 +599,25 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" src="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8776988522385)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726386828162)&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <p>Заведем функцию, которая будет для каждой точки находить ближайший к ней центр кластера.
-Здесь я буду использовать довольно кривой цикл по числу точек в нашей таблице.
-По-хорошему, здесь нужно пользоваться свойствами dataframe-ов.
-Данная функция создает пустой список, в который мы будет помещать метку кластера.
-Затем для каждой точки из таблицы вычисляются расстояния до текущих центров.
-После этого мы определяем индекс минимального элемента и используем этот индекс для выбора метки из <code class="docutils literal notranslate"><span class="pre">[&quot;1&quot;,</span> <span class="pre">&quot;2&quot;,</span> <span class="pre">&quot;3&quot;]</span></code>.</p>
+Назовем функцию <code class="docutils literal notranslate"><span class="pre">get_cluster</span></code>, которая принимает в качестве аргументов координаты точек и текущие центры.
+Внутри функции я пользуюсь свойством <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array-ев, которое называется трансляцией.
+Данное свойство позволяет обойтись без использования лишних циклов и вычислить расстояние от каждой точки до заданных центров.
+Я укажу <a class="reference external" href="https://runebook.dev/ru/docs/numpy/user/theory.broadcasting">ссылку</a> в текстовой версии данного эпизода.
+Это позволит тебе в деталях разобраться с тем, как устроена данная функция.
+В результате работы функции мы определяем индекс до ближайшего центра и в соответствии с этим определяем лейблы точкам.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_clusters</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">centers</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="p">(</span><span class="n">centers</span> <span class="o">-</span> <span class="n">coords</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">][</span><span class="n">distances</span><span class="o">.</span><span class="n">argmin</span><span class="p">()])</span>
-    <span class="k">return</span> <span class="n">result</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_clusters</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">centers</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">centers</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">([[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">distances</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
@@ -630,13 +650,13 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" src="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8776988552616)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378370880)&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Далее, нам необходимо определить центры для полученных кластеров.
-Для этого заведем дополнительную функцию, которая на вход примает наш dataframe и для каждого кластера вычисляет его центр:</p>
+<p>Далее, нам необходимо определить среднее положение коордиант каждого кластера.
+Для этого заведем дополнительную функцию, которая на вход принимает наш dataframe и для каждого кластера вычисляет его центр:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_centers</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -647,7 +667,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Теперь мы можем отобразить текущие центры:</p>
+<p>После этого мы можем отобразить, вычисленные средние центры для нашей текущей кластеризации:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centers_for_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">centers</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">]})),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -668,7 +688,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" src="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8776988522430)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378382550)&gt;
 </pre></div>
 </div>
 </div>
@@ -677,7 +697,7 @@ document.write(`
 <section id="id5">
 <h2>Финал<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>Нам осталось лишь повторять вышеприведенные шаги до тех пор, пока лейблы кластеров не совпадут для двух последовательных итераций.
-Оформим это в виде цикла <code class="docutils literal notranslate"><span class="pre">while</span></code>:</p>
+Оформим это в виде бесконечного цикла <code class="docutils literal notranslate"><span class="pre">while</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -709,17 +729,18 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" src="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8776980000009)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378300903)&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Я знаю, что какие-то куски могут быть не супер очевидными, но я всегда готов помочь разобраться в деталях.
-Просто дай мне знать об этом в комментариях, либо в телеграм-чате.
+<p>Я знаю, что какие-то куски кода могут быть не супер очевидными, но я всегда готов помочь разобраться в деталях.
+Однако, одним из хороших способов изучить программирование является процесс анализа чужого кода.
+В любом случае, просто дай мне знать, если тебе нужны какие-то подсказки относительно сегодняшнего эпизода, в комментариях, либо в телеграм-чате.
 На этом на сегодня всё.
 В следующий раз мы рассмотрим пример использования кластеризации для реальных данных, а не синтетичексих.
-Я думаю, что набор случайных точек не сильно интригует, но попробуем рассмотреть что-нибудь повеселее.
-До скорой встречи друг.</p>
+Я думаю, что набор случайных точек не сильно интригует, но попробуем рассмотреть что-нибудь повеселее в следующий раз.
+До скорой встречи, друг.</p>
 </section>
 </section>
 
@@ -736,7 +757,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./chapters/image_analysis/retrieve_color_palette"
+            path: "./chapters/data_analysis/retrieve_color_palette"
         },
         predefinedOutput: true
     }
@@ -784,7 +805,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Пример k-means</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Визуализация k-means</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Настройка окружения</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Генерация данных</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Реализация функционала</a></li>
