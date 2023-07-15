@@ -8,9 +8,9 @@ parts:
       chapters:
       - file: chapters/stable-diffusion
       - file: chapters/stable-diffusion-install-windows
-    - caption: Анализ изображений
+    - caption: Анализ данных
       chapters:
-      - file: chapters/image_analysis/retrieve_color_palette/k_means_from_scratch.ipynb
+      - file: chapters/data_analysis/retrieve_color_palette/k_means_from_scratch.ipynb
       
     - caption: Оффтопик
       chapters:
