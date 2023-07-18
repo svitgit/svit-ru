@@ -211,53 +211,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/svitgit/svit-book-ru" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/svitgit/svit-book-ru/issues/new?title=Issue%20on%20page%20%2Fchapters/data_analysis/retrieve_color_palette/k_means_application.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
@@ -387,14 +340,15 @@ document.write(`
 Предлагаю применить метод для кластеризации изображения.
 В качестве примера, рассмотрим данный кадр из фильма:</p>
 <a class="reference internal image-reference" href="../../../_images/moonrise-kingdom-suzy-lookout.jpg"><img alt="../../../_images/moonrise-kingdom-suzy-lookout.jpg" class="align-center" src="../../../_images/moonrise-kingdom-suzy-lookout.jpg" style="width: 720px;" /></a>
-<p>При помощи применения метода <code class="docutils literal notranslate"><span class="pre">k-means</span></code> мы научимся выделять цветовую палитру для анализируемого изображения.
+<p>При помощи применения метода <code class="docutils literal notranslate"><span class="pre">k-means</span></code> мы научимся по изображению определять цветовую палитру.
 В целом ты можешь задаться вопросом, а зачем.
-Например, для меня изучение цветовых палитров фильмов служит вдохновением для создания своих собственных кадров.
+Например, для меня цветовые палитры фильмов служат вдохновением для создания своих собственных кадров.
 Да и в целом, цветовые палитры могут позволить улучшить рассказ историй посредством визуала или помочь создавать визуально привлекательные дизайны.
-В подтверждение своих слов хочу привести примеры ресурсов, которые полностью специализируются на подборе цветовых палитров.
+В подтверждение своих слов хочу привести примеры ресурсов, которые только и делают, что специализируются на подборе цветовых палитр.
 Например, сайт <a class="reference external" href="https://coolors.co/">coolors</a> или сайт <a class="reference external" href="https://color.adobe.com/create/color-wheel">adobe.color</a>.
 Как ты видишь, всё это позволяет профессионалам из различных творческих областей перенимать мастерство кинематографистов и применять эти принципы в своей собственной работе, в результате чего получаются уникальные и визуально привлекательные творения.</p>
-<p>Если ты смотрел мой предыдущий ролик, то ты помнишь что в качестве исходных данных у нас были точки на плоскости.
+<a class="reference internal image-reference" href="../../../_images/image_representation.gif"><img alt="../../../_images/image_representation.gif" class="align-center" src="../../../_images/image_representation.gif" style="width: 720px;" /></a>
+<p>Если ты смотрел мой предыдущий <a class="reference external" href="https://youtu.be/8WQOFRFdLao">ролик</a>, то ты помнишь что в качестве исходных данных у нас были точки на плоскости.
 Поэтому нам требуется каким-то образом свести картинку к набору точек в пространстве.</p>
 </section>
 <section id="id2">
@@ -407,17 +361,19 @@ document.write(`
 Ок, но как же мы можем хранить информацию об этом в нашем компьютере?
 Давай абстрактно выделим тройку разноцветных элементов в группу и назовем пикселем.
 В таком случае мы можем сказать, что любое изображение представляет собой многомерный массив, а именно масив размерности <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">w,</span> <span class="pre">c)</span></code>, где <code class="docutils literal notranslate"><span class="pre">h</span></code> - высота, <code class="docutils literal notranslate"><span class="pre">w</span></code> - ширина и <code class="docutils literal notranslate"><span class="pre">c</span></code> - число цветов.</p>
+<a class="reference internal image-reference" href="../../../_images/pixels.gif"><img alt="../../../_images/pixels.gif" class="align-center" src="../../../_images/pixels.gif" style="width: 720px;" /></a>
 </section>
 <section id="id3">
 <h2>Разворачивание изображения<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>Собственно, таким образом зачастую изображения и представлены в языках программирования.
-Однако, для нашей задачи такое представление слегка усложненное.
-Мы имеем трехмерный массив, а нам хотелось бы иметь информацию в следующем виде: <code class="docutils literal notranslate"><span class="pre">(h</span> <span class="pre">*</span> <span class="pre">w,</span> <span class="pre">c)</span></code>, т.е. в виде таблицы, с тремя столбцами и числом строк соответствующему числу всех пикселей.
+Однако, для нашей задачи такое представление является слегка усложненным.
+Мы имеем трехмерный массив, а нам хотелось бы иметь информацию в виде двухмерного массива размерности: <code class="docutils literal notranslate"><span class="pre">(h</span> <span class="pre">*</span> <span class="pre">w,</span> <span class="pre">c)</span></code>, т.е. в виде таблицы, с тремя столбцами и числом строк соответствующему числу всех пикселей.
 В таком случае получилось бы, что каждый пиксель представляет собой точку в трехмерном пространстве, где первая координата соответствует интенсивности красного цвета, вторая - интенсивности зеленого и последняя координата отвечает за интенсивность синего цвета.</p>
 <p>Сделать это не так сложно, давай просто возьмем каждый двумерный массив для каждого цвета и уложим его в одномерный массив.
 Выглядит это как-то так, мы берем все строчки и разворачиваем их в ряд.
 Ок, после этого мы имеем данные, которые готовы к кластеризации.
 Теперь перейдем к процессу написания, нашей программы.</p>
+<a class="reference internal image-reference" href="../../../_images/array_representation.gif"><img alt="../../../_images/array_representation.gif" class="align-center" src="../../../_images/array_representation.gif" style="width: 720px;" /></a>
 </section>
 <section id="id4">
 <h2>Настройка окружения<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
@@ -616,6 +572,47 @@ todo</p>
 </section>
 <section id="id9">
 <h2>Лейблы кластеризации<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p>Мы можем помимо центров действительно закластеризовать все пиксели, то есть присвоить им лейблы.
+Для этого выполним следующий код:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">flat_img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6 3 3 3 3 3 6 6 3 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>То есть в нашем случае, например, первый пиксель соответствует кластеру с индексом <code class="docutils literal notranslate"><span class="pre">3</span></code>, третий пиксель соответствует кластеру с индексом <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<p>Также мы можем создать изображение в котором каждый пиксель будет заменен цветом ближайшего центра:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">km_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># преобразуем изображение обратно к трехмерному массиву</span>
+<span class="n">km_img</span> <span class="o">=</span> <span class="n">km_img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lab2rgb</span><span class="p">(</span><span class="n">km_img</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/b7b0fadb7d6bd47a0d6282d1b432e1aedccd207583d4461207f481fd8a9e024a.png" src="../../../_images/b7b0fadb7d6bd47a0d6282d1b432e1aedccd207583d4461207f481fd8a9e024a.png" />
+</div>
+</div>
+<p>Таким образом, <code class="docutils literal notranslate"><span class="pre">k-means</span></code> при применении для изображений может быть использован для их сжатия.
+Также в ряде задач в области машинного обучения бывает полезно провести такое преобразование изображения, оставив лишь наиболее важные элемент изображения.</p>
+<p>На этом на сегодня всё.
+Как и всегда, я с радостью готов помочь разобраться со сложностями, которые могли возникнуть при прсмотре сегодняшнего эпизода.
+Просто дай мне об этом знать в комментариях или в телеграм-чате.
+До скорой встречи, друг.</p>
 </section>
 </section>
 
