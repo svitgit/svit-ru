@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../../_static/svit_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Jupyter-notebook на android устройстве" href="../../programming_on_phone/jupyter_installation_in_termux.html" />
-    <link rel="prev" title="Установка на Windows" href="../../stable-diffusion-install-windows.html" />
+    <link rel="next" title="Применение K-means" href="k_means_application.html" />
+    <link rel="prev" title="SVIT" href="../../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -157,14 +157,10 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Stable Diffusion</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../stable-diffusion.html">Что такое stable-diffusion?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stable-diffusion-install-windows.html">Установка на Windows</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Анализ данных</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Анализ данных</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">K-means</a></li>
+<li class="toctree-l1"><a class="reference internal" href="k_means_application.html">Применение K-means</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Оффтопик</span></p>
 <ul class="nav bd-sidenav">
@@ -516,7 +512,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" src="../../../_images/157474e70a5bd7b983f5ca8a28f0635bba9462942a0d9b66579acaa49e58d082.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726386973291)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8775558008295)&gt;
 </pre></div>
 </div>
 </div>
@@ -599,7 +595,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" src="../../../_images/7ccec3f80357dee1baf0e5df571e4796b5edb5f17121f18891959e7cf7e3daf1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726386828162)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8775557835626)&gt;
 </pre></div>
 </div>
 </div>
@@ -650,7 +646,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" src="../../../_images/a9d051e7dd48a0334ba39d66587a138987b24e12b230f5c51816c438711819d0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378370880)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8775549349333)&gt;
 </pre></div>
 </div>
 </div>
@@ -688,7 +684,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" src="../../../_images/b3b810b093baa8bfa22b801027359ecab2d9b69c5c73db01ae29b52eeafce9a8.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378382550)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8775549394137)&gt;
 </pre></div>
 </div>
 </div>
@@ -729,7 +725,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" src="../../../_images/ab67624df6c6f40c09cf6e5208eae78404b1478c4ab0bd7ac2b4b9645d31c155.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8726378300903)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (8775549309157)&gt;
 </pre></div>
 </div>
 </div>
@@ -773,20 +769,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../stable-diffusion-install-windows.html"
+       href="../../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Установка на Windows</p>
+        <p class="prev-next-title">SVIT</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../programming_on_phone/jupyter_installation_in_termux.html"
+       href="k_means_application.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Jupyter-notebook на android устройстве</p>
+        <p class="prev-next-title">Применение K-means</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
