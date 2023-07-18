@@ -4,13 +4,14 @@
 format: jb-book
 root: chapters/intro
 parts:
-    - caption: Stable Diffusion
-      chapters:
-      - file: chapters/stable-diffusion
-      - file: chapters/stable-diffusion-install-windows
+    # - caption: Stable Diffusion
+    #   chapters:
+    #   - file: chapters/stable-diffusion
+    #   - file: chapters/stable-diffusion-install-windows
     - caption: Анализ данных
       chapters:
       - file: chapters/data_analysis/retrieve_color_palette/k_means_from_scratch.ipynb
+      - file: chapters/data_analysis/retrieve_color_palette/k_means_application.ipynb
       
     - caption: Оффтопик
       chapters:
