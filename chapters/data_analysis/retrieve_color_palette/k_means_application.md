@@ -19,7 +19,7 @@ kernelspec:
 Сегодня рассмотрим возможный пример применения метода кластеризации `k-means`.
 Предлагаю применить метод для кластеризации изображения.
 В качестве примера, рассмотрим данный кадр из фильма:
-```{image} ./fig/moonrise-kingdom-suzy-lookout.jpg
+```{image} ./fig/barbie.jpg
 :width: 720px
 :align: center
 ```
@@ -110,7 +110,7 @@ from sklearn.cluster import MiniBatchKMeans
 В качестве примера, я сегодня рассмотрю процесс работы с изображениями за счёт использования библиотеки `skimage`.
 Воспользуемся модулем `io` для чтения изображения:
 ```{code-cell} ipython3
-img = io.imread("./fig/moonrise-kingdom-suzy-lookout.jpg")
+img = io.imread("./fig/barbie.jpg")
 ```
 
 Мы можем отобразить наше изображения при помощи функци `imshow`:
