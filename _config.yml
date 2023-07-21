@@ -3,7 +3,7 @@
 
 title: SVIT-Book
 author: SVIT
-logo: svit_logo.png
+logo: svit_logo.svg
 copyright: "2023"
 
 # Force re-execution of notebooks on each build.
@@ -32,7 +32,7 @@ repository:
 html:
   use_issues_button: false
   use_repository_button: false
-  favicon: svit_logo.png
+  favicon: svit_logo.svg
 
 # for plotly
 sphinx:
