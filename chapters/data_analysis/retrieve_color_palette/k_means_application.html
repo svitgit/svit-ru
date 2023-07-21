@@ -348,7 +348,7 @@ document.write(`
 Например, сайт <a class="reference external" href="https://coolors.co/">coolors</a> или сайт <a class="reference external" href="https://color.adobe.com/create/color-wheel">adobe.color</a>.
 Как ты видишь, всё это позволяет профессионалам из различных творческих областей перенимать мастерство кинематографистов и применять эти принципы в своей собственной работе, в результате чего получаются уникальные и визуально привлекательные творения.</p>
 <a class="reference internal image-reference" href="../../../_images/image_representation.gif"><img alt="../../../_images/image_representation.gif" class="align-center" src="../../../_images/image_representation.gif" style="width: 720px;" /></a>
-<p>Если ты смотрел мой предыдущий <a class="reference external" href="https://youtu.be/8WQOFRFdLao">ролик</a>, то ты помнишь что в качестве исходных данных у нас были точки на плоскости.
+<p>Если ты смотрел мой предыдущий <a class="reference external" href="https://youtu.be/8WQOFRFdLao">ролик</a>, то ты помнишь, что в качестве исходных данных у нас были точки на плоскости.
 Поэтому нам требуется каким-то образом свести картинку к набору точек в пространстве.</p>
 </section>
 <section id="id2">
@@ -390,7 +390,7 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>matplotlib<span class="w"> </span>scikit-image<span class="w"> </span>scikit-learn
 </pre></div>
 </div>
-<p>Также я создам папку <code class="docutils literal notranslate"><span class="pre">fig</span></code> и помещу в него наше изображение.</p>
+<p>Также я создам папку <code class="docutils literal notranslate"><span class="pre">pics</span></code> и помещу в него наше изображение.</p>
 </section>
 <section id="id5">
 <h2>Загрузка библиотек<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
@@ -402,7 +402,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">rgb2lab</span><span class="p">,</span> <span class="n">lab2rgb</span><span class="p">,</span> <span class="n">hsv2rgb</span>
+<span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">rgb2lab</span><span class="p">,</span> <span class="n">lab2rgb</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">MiniBatchKMeans</span>
 </pre></div>
 </div>
@@ -412,11 +412,11 @@ document.write(`
 <section id="id6">
 <h2>Чтение и отображение изображения<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 <p>В Python существует множество библиотек для работы с изображениями.
-В качестве примера, я сегодня рассмотрю процесс работы с изображениями за счёт использования библиотеки <code class="docutils literal notranslate"><span class="pre">skimage</span></code>.
+В качестве примера я сегодня рассмотрю процесс работы с изображениями за счёт использования библиотеки <code class="docutils literal notranslate"><span class="pre">skimage</span></code>.
 Воспользуемся модулем <code class="docutils literal notranslate"><span class="pre">io</span></code> для чтения изображения:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./fig/barbie.jpg&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./pics/barbie.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -447,7 +447,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>В данном случае наша картинка имеет высоту 2351 пикселей и ширину 3900 пикселей.</p>
+<p>В данном случае наша картинка имеет высоту 2400 пикселей и ширину 3600 пикселей.</p>
 <p>Давай для начала рассмотрим как выглядит индивидуальный цветовой канал, данного изображения:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -460,7 +460,7 @@ document.write(`
 <p>Для отображения их воспользуемся следующим кодом:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pics</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_channel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
@@ -487,8 +487,9 @@ document.write(`
 <p>Отлично, теперь перейдем непосредственно к процессу кластеризации.
 Для начала, я хочу перевести изображение из <code class="docutils literal notranslate"><span class="pre">rgb</span></code>-пространства в <code class="docutils literal notranslate"><span class="pre">lab</span></code>-пространство.
 Тут я не хочу сильно вдаваться в подробности, однако существуют различные способы представления изображений.
-Также, как например мы можем использовать различные системы исчисления для записи одного и того же числа.
-В целом различные цветовые пространства обладают различными свойствами.
+Хочу лишь привести аналогию с различными формами записями числа, где использование различных систем исчисления приводит к различным видам записи одного и того же числа.
+При этом могут существовать различные преимущества в различных формах записи.
+Так и здесб, различные цветовые пространства обладают различными свойствами.
 Далее меня будет интересовать <code class="docutils literal notranslate"><span class="pre">lab</span></code>-пространство, так как расстояния между точками в этом пространстве лучше соответствуют человеческому восприятию цветов.
 Итак переведем изображения в <code class="docutils literal notranslate"><span class="pre">lab</span></code>-пространство и переведем данные из трехмерного массива в двухмерный:</p>
 <div class="cell docutils container">
@@ -505,8 +506,6 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Здесь мы собственно выполнили данный шаг:
-todo</p>
 <p>Для кластеризации в данном ролике, я буду пользоваться готовой реализацией метода <code class="docutils literal notranslate"><span class="pre">k-means</span></code> библиотеки <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, а именно <code class="docutils literal notranslate"><span class="pre">MiniBatchKMeans</span></code>:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -543,7 +542,7 @@ todo</p>
 </div>
 </div>
 </div>
-<p>Здесь я записываю центры в переменную <code class="docutils literal notranslate"><span class="pre">centers</span></code> и после этого сортирую centers, чтобы визуально наиболее похожие цвета располагались рядом друг с другом:</p>
+<p>Здесь я записываю центры в переменную <code class="docutils literal notranslate"><span class="pre">centers</span></code> и после этого сортирую <code class="docutils literal notranslate"><span class="pre">centers</span></code>, чтобы визуально наиболее похожие цвета располагались рядом друг с другом:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">]</span>
@@ -558,7 +557,7 @@ todo</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab2rgb</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">color</span><span class="p">))</span> <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">centers</span><span class="p">]</span>
 <span class="n">palette</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">pics</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -587,7 +586,7 @@ todo</p>
 </div>
 </div>
 </div>
-<p>То есть в нашем случае, например, первый пиксель соответствует кластеру с индексом <code class="docutils literal notranslate"><span class="pre">3</span></code>, третий пиксель соответствует кластеру с индексом <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<p>То есть в нашем случае, например, первые десять пикселей соответствуют кластеру с индексом <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
 <p>Также мы можем создать изображение в котором каждый пиксель будет заменен цветом ближайшего центра:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -596,7 +595,7 @@ todo</p>
 <span class="c1"># преобразуем изображение обратно к трехмерному массиву</span>
 <span class="n">km_img</span> <span class="o">=</span> <span class="n">km_img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">pics</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lab2rgb</span><span class="p">(</span><span class="n">km_img</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -607,10 +606,11 @@ todo</p>
 <img alt="../../../_images/9a99d0ff75392be7193090b05012e0d0aa93567e65987f754feffc823b154393.png" src="../../../_images/9a99d0ff75392be7193090b05012e0d0aa93567e65987f754feffc823b154393.png" />
 </div>
 </div>
-<p>Таким образом, <code class="docutils literal notranslate"><span class="pre">k-means</span></code> при применении для изображений может быть использован для их сжатия.
-Также в ряде задач в области машинного обучения бывает полезно провести такое преобразование изображения, оставив лишь наиболее важные элемент изображения.</p>
+<p>Чем-то похоже на работы Энди Уорхола неправда ли?
+Из данного примера видно, что применение <code class="docutils literal notranslate"><span class="pre">k-means</span></code> может быть использовано для сжатия изображения.
+Также в ряде задач в области машинного обучения бывает полезно провести такое преобразование изображения, оставив лишь наиболее важные элемент изображения с последующим их анализом.</p>
 <p>На этом на сегодня всё.
-Как и всегда, я с радостью готов помочь разобраться со сложностями, которые могли возникнуть при прсмотре сегодняшнего эпизода.
+Как и всегда, я с радостью готов помочь разобраться со сложностями, которые могли возникнуть при просмотре сегодняшнего эпизода.
 Просто дай мне об этом знать в комментариях или в телеграм-чате.
 До скорой встречи, друг.</p>
 </section>

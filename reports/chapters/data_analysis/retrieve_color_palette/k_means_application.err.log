@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/vdsukhov/miniconda3/envs/jbook/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+palette = [lab2rgb(np.full((100, 100, 3), color)) for color in centers]
+palette = np.concatenate(palette, axis=1)
+
+pics = plt.picsure(figsize=(7, 2))
+plt.imshow(palette)
+plt.gca().axis("off")
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[11], line 4[0m
+[1;32m      1[0m palette [38;5;241m=[39m [lab2rgb(np[38;5;241m.[39mfull(([38;5;241m100[39m, [38;5;241m100[39m, [38;5;241m3[39m), color)) [38;5;28;01mfor[39;00m color [38;5;129;01min[39;00m centers]
+[1;32m      2[0m palette [38;5;241m=[39m np[38;5;241m.[39mconcatenate(palette, axis[38;5;241m=[39m[38;5;241m1[39m)
+[0;32m----> 4[0m pics [38;5;241m=[39m [43mplt[49m[38;5;241;43m.[39;49m[43mpicsure[49m(figsize[38;5;241m=[39m([38;5;241m7[39m, [38;5;241m2[39m))
+[1;32m      5[0m plt[38;5;241m.[39mimshow(palette)
+[1;32m      6[0m plt[38;5;241m.[39mgca()[38;5;241m.[39maxis([38;5;124m"[39m[38;5;124moff[39m[38;5;124m"[39m)
+
+[0;31mAttributeError[0m: module 'matplotlib.pyplot' has no attribute 'picsure'
+AttributeError: module 'matplotlib.pyplot' has no attribute 'picsure'
+
