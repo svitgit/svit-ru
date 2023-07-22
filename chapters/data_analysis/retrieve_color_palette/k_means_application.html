@@ -489,7 +489,7 @@ document.write(`
 Тут я не хочу сильно вдаваться в подробности, однако существуют различные способы представления изображений.
 Хочу лишь привести аналогию с различными формами записями числа, где использование различных систем исчисления приводит к различным видам записи одного и того же числа.
 При этом могут существовать различные преимущества в различных формах записи.
-Так и здесб, различные цветовые пространства обладают различными свойствами.
+Так и здесь, различные цветовые пространства обладают различными свойствами.
 Далее меня будет интересовать <code class="docutils literal notranslate"><span class="pre">lab</span></code>-пространство, так как расстояния между точками в этом пространстве лучше соответствуют человеческому восприятию цветов.
 Итак переведем изображения в <code class="docutils literal notranslate"><span class="pre">lab</span></code>-пространство и переведем данные из трехмерного массива в двухмерный:</p>
 <div class="cell docutils container">
@@ -537,7 +537,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">]</span>
-<span class="n">centers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">clrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">clrs</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -545,8 +544,7 @@ document.write(`
 <p>Здесь я записываю центры в переменную <code class="docutils literal notranslate"><span class="pre">centers</span></code> и после этого сортирую <code class="docutils literal notranslate"><span class="pre">centers</span></code>, чтобы визуально наиболее похожие цвета располагались рядом друг с другом:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">]</span>
-<span class="n">centers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">clrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">clrs</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">clrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">clrs</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
